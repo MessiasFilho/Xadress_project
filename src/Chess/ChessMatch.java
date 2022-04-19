@@ -30,8 +30,8 @@ public class ChessMatch {
 	}
 	
 	private void InitialSetUp () {
-		board.placePiece(new Rock(board ,Color.Black), new Position(2, 3));
-		board.placePiece(new King(board , Color.white), new Position(5,2));
-	}
+		board.placePiece(new Rock(board ,Color.Black), new Position(3,3));
+		board.placePiece(new King(board , Color.white), new Position(3,3));
+	} 
 	
 }
