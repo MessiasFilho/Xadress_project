@@ -33,9 +33,21 @@ public class ChessMatch {
 	}
 	
 	private void InitialSetUp () {
-		PlaceNewPieace('a' ,8, new Rock(board ,Color.Black));
-		
-		PlaceNewPieace('e',1, new King(board , Color.white));
+		PlaceNewPieace('b', 6, new Rock(board, Color.White));
+		PlaceNewPieace('e', 8, new King(board, Color.Black));
+		PlaceNewPieace('e', 1, new King(board, Color.White));
+        PlaceNewPieace('c', 2, new Rock(board, Color.White));
+        PlaceNewPieace('d', 2, new Rock(board, Color.White));
+        PlaceNewPieace('e', 2, new Rock(board, Color.White));
+      //  PlaceNewPieace('e', 1, new Rock(board, Color.White));
+        PlaceNewPieace('d', 1, new King(board, Color.White));
+
+        PlaceNewPieace('c', 7, new Rock(board, Color.Black));
+        PlaceNewPieace('c', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('d', 7, new Rock(board, Color.Black));
+        PlaceNewPieace('e', 7, new Rock(board, Color.Black));
+       // PlaceNewPieace('e', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('d', 8, new King(board, Color.Black));
 	} 
 	
 }
