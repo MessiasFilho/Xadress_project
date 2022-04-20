@@ -7,14 +7,12 @@ import Chess.Color;
 public class Rock extends ChessPiece {
 
 	public Rock(Board board, Color color) {
-		super(board, color);
-	
+		super(board, color);	
 		
 		
 	}
 	@Override
-	public String toString() {
-			
+	public String toString() {		
 		return "R";
 	}
 }
