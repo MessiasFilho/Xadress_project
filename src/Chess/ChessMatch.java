@@ -31,10 +31,12 @@ public class ChessMatch {
 		Position target = TargetPosition.toPosition(); 
 		
 		validateSourcePosition (source); 
+		validadeTargetPosition (source, target); 
 		Piece capturedPiece = MakeMove (source , target);  
 		return 	(ChessPiece) capturedPiece; 
 			
 	}
+	
 	
 	private Piece MakeMove (Position source , Position target  ) {
 		
@@ -53,8 +55,18 @@ public class ChessMatch {
 		if (!board.ThereIsAPiece(position) ) {
 			throw new ChessExp ("There is no piece on source position"); }
 				
-			
+		if (!board.piece(position).IsThereAnyPossibleMove()) {	
+			throw new ChessExp("There is possible moves for the chosen piece "); 
+		}
 		
+	}
+	
+	
+	private void validadeTargetPosition (Position source , Position target  ) {
+		if (!board.piece(source).possibleMoves(target)) {
+			throw new ChessExp("The chosen piece can't move to target position"); 
+			
+		}
 	}
 	
 	
