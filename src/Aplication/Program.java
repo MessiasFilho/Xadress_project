@@ -31,7 +31,8 @@ public class Program {
 				ChessPosition target = UI.ReadChessPosition(sc); 
 				
 					ChessPiece capturedPiece = mat.performChessMove(source, target); 
-			}catch(ChessExp e ) {
+			}
+			catch(ChessExp e ) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
 			}
