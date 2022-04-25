@@ -32,7 +32,10 @@ public class Position {
 		Colun = colun;
 	} 
 	
-	
+	public void setValues (int row , int colunm  ) { 
+		this.Row = row ; 
+		this.Colun = colunm; 
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
