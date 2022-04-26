@@ -38,7 +38,6 @@ public class UI {
 			System.out.flush();
 		}
 		
-		
 		public static ChessPosition ReadChessPosition (Scanner sc ) {
 			try {
 				String s = sc.nextLine(); 
@@ -58,18 +57,38 @@ public class UI {
 			System.out.print((8 - i) + " " );
 			
 			for (int j = 0 ; j < pieces.length ; j++) {
-				printPiece(pieces [i] [j] ); 
+				printPiece(pieces [i] [j] , false ); 
 			}
 			
 			System.out.println();
 		}
 		System.out.println("   a b c d e f g h");
 	}
+		
+		public static void printBoard (ChessPiece [][] pieces , boolean[][] PossiblesMoves ) {
+			
+			for (int i = 0 ; i < pieces.length ; i++ ) {
+				
+				System.out.print((8 - i) + " " );
+				
+				for (int j = 0 ; j < pieces.length ; j++) {
+					printPiece(pieces [i] [j] , PossiblesMoves[i][j] ); 
+				}
+				
+				System.out.println();
+			}
+			System.out.println("   a b c d e f g h");
+		}
+
 	
-		private static void printPiece(ChessPiece piece) {
+		private static void printPiece(ChessPiece piece , boolean backgroud) {
+			if (backgroud) {
+				System.out.print(ANSI_GREEN_BACKGROUND);
+			}
+			
 			System.out.print(" ");
 	    	if (piece == null) {
-	            System.out.print("-");
+	            System.out.print("-"+ ANSI_RESET);
 	        }
 	        else {
 	            if ( piece.getColor() == Color.White) {
