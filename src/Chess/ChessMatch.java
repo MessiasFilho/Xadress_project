@@ -9,6 +9,7 @@ import Chess.Pieces.Rock;
 public class ChessMatch {
 	
 	private Board board ; 	
+	
 	public ChessMatch () {
 		board = new Board ( 8 , 8 );
 		InitialSetUp (); 
@@ -24,6 +25,13 @@ public class ChessMatch {
 		}
 		
 		return mat ; 
+	}
+	
+	public boolean [][] PosibleMoves (ChessPosition SourcePosition){
+		Position position = SourcePosition.toPosition(); 
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves(); 
+		
 	}
 	
 	public  ChessPiece performChessMove (ChessPosition sourcePosition , ChessPosition TargetPosition  ) {
