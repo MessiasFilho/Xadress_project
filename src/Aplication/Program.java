@@ -24,6 +24,10 @@ public class Program {
 				System.out.print("Source: ");
 				ChessPosition source = UI.ReadChessPosition(sc);
 				
+				boolean [][]possibleMoves = mat.PosibleMoves(source); 
+				UI.ClearScream();
+				UI.printBoard(mat.getPieces() , possibleMoves );
+				
 				System.out.println();
 				
 				System.out.print("Tareget: ");
