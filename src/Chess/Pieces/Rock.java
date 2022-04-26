@@ -22,7 +22,7 @@ public class Rock extends ChessPiece {
 		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		// marcar acima da peça
 		// above
-		Position p = new Position(0, 0);
+		Position p = new Position(0,0);
 		
 		p.setValues(position.getRow() - 1, position.getColun());
 
@@ -34,9 +34,11 @@ public class Rock extends ChessPiece {
 			mat[p.getRow()][p.getColun()] = true;
 		}
 
+		 
 		// marcar a esquerda da peça
 		// left
-		p.setValues(position.getRow() - 1, position.getColun());
+		
+		p.setValues(position.getRow() , position.getColun() -1);
 
 		while (getBoard().PostionExist(p) && !getBoard().ThereIsAPiece(p)) {
 			mat[p.getRow()][p.getColun()] = true;
@@ -48,19 +50,19 @@ public class Rock extends ChessPiece {
 
 		// marcar a Direita da peça
 		// reght
-		p.setValues(position.getRow() + 1, position.getColun());
+		p.setValues(position.getRow(), position.getColun() +1);
 
 		while (getBoard().PostionExist(p) && !getBoard().ThereIsAPiece(p)) {
 			mat[p.getRow()][p.getColun()] = true;
 			p.setColun(p.getColun() + 1);
 		}
+		
 		if (getBoard().PostionExist(p) && IsThereOponentPiece(p)) {
 			mat[p.getRow()][p.getColun()] = true;
 		}
 
 		// marcar a baixo da peça
 		// below 
-		
 		
 		p.setValues(position.getRow() + 1, position.getColun());
 
