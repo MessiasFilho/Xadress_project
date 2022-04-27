@@ -8,12 +8,28 @@ import Chess.Pieces.Rock;
 
 public class ChessMatch {
 	
+	private int Turn ; 
+	
+	private Color CurrentPlayer ; 
+	
 	private Board board ; 	
 	
 	public ChessMatch () {
 		board = new Board ( 8 , 8 );
+		Turn = 1 ; 
+		CurrentPlayer = Color.White; 
+		
 		InitialSetUp (); 
 	}
+	
+	public int getTurn() {
+		return Turn;
+	}
+
+	public Color getCurrentPlayer() {
+		return CurrentPlayer;
+	}
+
 	public ChessPiece[][] getPieces () {
 		
 		ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColumns()];
@@ -41,6 +57,8 @@ public class ChessMatch {
 		validateSourcePosition (source); 
 		validadeTargetPosition (source, target); 
 		Piece capturedPiece = MakeMove (source , target);  
+		
+		nextTurn();
 		return 	(ChessPiece) capturedPiece; 
 			
 	}
@@ -62,6 +80,10 @@ public class ChessMatch {
 	private void validateSourcePosition (Position position) {
 		if (!board.ThereIsAPiece(position) ) {
 			throw new ChessExp ("There is no piece on source position"); }
+		
+		if (CurrentPlayer != ((ChessPiece)board.piece(position)).getColor() ) {
+			throw new ChessExp("The chosen piece not is yours");
+		}
 				
 		if (!board.piece(position).IsThereAnyPossibleMove()) {	
 			throw new ChessExp("There is possible moves for the chosen piece "); 
@@ -77,6 +99,11 @@ public class ChessMatch {
 		}
 	}
 	
+	private void nextTurn () {
+		Turn++ ; 
+		CurrentPlayer = (CurrentPlayer == Color.White ) ? Color.Black : Color.White ; 
+	}
+	
 	
 	private void PlaceNewPieace (char Colunm , int Row , ChessPiece piece ) { 
 		board.placePiece(piece, new  ChessPosition(Colunm, Row).toPosition());
@@ -85,7 +112,7 @@ public class ChessMatch {
 	private void InitialSetUp () {
 		PlaceNewPieace('b', 6, new Rock(board, Color.White));
 		PlaceNewPieace('e', 8, new King(board, Color.Black));
-		PlaceNewPieace('e', 1, new King(board, Color.White));
+		PlaceNewPieace('e', 4, new King(board, Color.White));
         PlaceNewPieace('c', 2, new Rock(board, Color.White));
         PlaceNewPieace('d', 2, new Rock(board, Color.White));
         PlaceNewPieace('e', 2, new Rock(board, Color.White));
@@ -93,11 +120,11 @@ public class ChessMatch {
         PlaceNewPieace('d', 1, new King(board, Color.White));
 
         PlaceNewPieace('c', 7, new Rock(board, Color.Black));
-        PlaceNewPieace('c', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('b', 5, new Rock(board, Color.Black));
         PlaceNewPieace('d', 7, new Rock(board, Color.Black));
         PlaceNewPieace('e', 7, new Rock(board, Color.Black));
        // PlaceNewPieace('e', 8, new Rock(board, Color.Black));
-        PlaceNewPieace('d', 8, new King(board, Color.Black));
+        PlaceNewPieace('f', 6, new King(board, Color.Black));
 	} 
 	
 }
