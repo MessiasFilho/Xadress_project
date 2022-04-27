@@ -19,7 +19,7 @@ public class Program {
 		while (true) {
 			try {
 				UI.ClearScream();
-				UI.printBoard(mat.getPieces());
+				UI.printMatch(mat);
 				System.out.println();
 				System.out.print("Source: ");
 				ChessPosition source = UI.ReadChessPosition(sc);
