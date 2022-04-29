@@ -22,6 +22,8 @@ public class ChessMatch {
 	
 	private boolean Check ; 
 	
+	private boolean CheckMate;
+	
 	private List <Piece> CapturedpieceList = new ArrayList<>();
 	public ChessMatch () {
 		board = new Board ( 8 , 8 );
@@ -29,6 +31,10 @@ public class ChessMatch {
 		CurrentPlayer = Color.White; 
 		
 		InitialSetUp (); 
+	}
+	
+	public  boolean getCheckMate () {
+		return CheckMate ; 
 	}
 	
 	public boolean getCheck () {
@@ -78,7 +84,14 @@ public class ChessMatch {
 		
 		Check = (TestCheck(Opponent(CurrentPlayer)))? true : false ; 
 		
-		nextTurn();
+		if (TestCheckMate(Opponent(CurrentPlayer))) {
+			CheckMate = true ; 
+		}
+		else {
+			nextTurn();
+		}
+		
+		
 		return 	(ChessPiece) capturedPiece; 
 			
 	}
@@ -159,6 +172,45 @@ public class ChessMatch {
 		throw new IllegalStateException("There is no "+ color + " King on the board "); 
 	}
 	
+	private boolean TestCheckMate (Color color ) { 
+	
+		if (!TestCheck(color)) {
+			return false; 
+		}
+
+		List <Piece> list = pieceOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor()== color).collect(Collectors.toList()); 
+		
+		for (Piece p : list ) {
+			boolean [][] mat = p.possibleMoves(); 
+			
+			for  (int i = 0 ; i < board.getRows() ; i++ ) {
+				for (int j = 0 ; j < board.getColumns(); j++) {
+					
+					if (mat[i][j] ) {
+						Position source = ((ChessPiece) p ).getChessPosition().toPosition(); 
+						Position target = new Position(i,j); 
+						Piece capturedPiece = MakeMove(source, target); 
+						boolean testeCheck = TestCheck(color); 
+						
+						undoMove(source, target, capturedPiece);
+						
+						if (!testeCheck) {
+							return false ; 
+						}
+ 					}
+					
+				}
+			}
+			
+		}
+		
+		return true ; 
+	
+	
+	}
+	
+	
+	
 	private boolean TestCheck (Color color ) {
 		Position kingPosition = King(color).getChessPosition().toPosition();
 		
@@ -182,20 +234,20 @@ public class ChessMatch {
 	
 	private void InitialSetUp () {
 		//PlaceNewPieace('b', 6, new Rock(board, Color.White));
-		PlaceNewPieace('e', 8, new King(board, Color.Black));
+		PlaceNewPieace('h', 7, new Rock(board, Color.White));
 		//PlaceNewPieace('e', 4, new King(board, Color.White));
-        PlaceNewPieace('c', 2, new Rock(board, Color.White));
-        PlaceNewPieace('d', 2, new Rock(board, Color.White));
-        PlaceNewPieace('e', 2, new Rock(board, Color.White));
+        PlaceNewPieace('d', 1, new Rock(board, Color.White));
+        PlaceNewPieace('e', 1, new King(board, Color.White));
+      //  PlaceNewPieace('e', 2, new Rock(board, Color.White));
       //  PlaceNewPieace('e', 1, new Rock(board, Color.White));
-        PlaceNewPieace('d', 1, new King(board, Color.White));
+      //  PlaceNewPieace('d', 1, new King(board, Color.White));
 
-        PlaceNewPieace('c', 7, new Rock(board, Color.Black));
-        PlaceNewPieace('b', 5, new Rock(board, Color.Black));
-        PlaceNewPieace('d', 7, new Rock(board, Color.Black));
-        PlaceNewPieace('e', 7, new Rock(board, Color.Black));
+        PlaceNewPieace('b', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('a', 8, new King(board, Color.Black));
+       // PlaceNewPieace('d', 7, new Rock(board, Color.Black));
+       // PlaceNewPieace('e', 7, new Rock(board, Color.Black));
        // PlaceNewPieace('e', 8, new Rock(board, Color.Black));
-        PlaceNewPieace('f', 6, new King(board, Color.Black));
+       // PlaceNewPieace('f', 6, new King(board, Color.Black));
 	} 
 	
 }
