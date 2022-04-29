@@ -21,7 +21,7 @@ public class Program {
 		
 		
 		
-		while (true) {
+		while (!mat.getCheckMate()) {
 			try {
 				UI.ClearScream();
 				UI.printMatch(mat , captured);
@@ -58,7 +58,8 @@ public class Program {
 			
 		}
 		 
-		
+		UI.ClearScream();
+		UI.printMatch(mat, captured);
 		
 	}
 
