@@ -7,7 +7,9 @@ import BoardGame.Position;
 public abstract class ChessPiece extends Piece {
 
 	private Color color ;
-
+	
+	private int MoveCount ; 
+	
 	public ChessPiece(Board board, Color color) {
 		super(board);
 		this.color = color;
@@ -16,7 +18,19 @@ public abstract class ChessPiece extends Piece {
 	public Color getColor() {
 		return color;
 	}
-
+	
+	public int GetMoveCount() {
+		return MoveCount; 
+	}
+	
+	public void IncreaseMoveCount () {
+		MoveCount++; 
+		
+	}
+	
+	public void DecreaseMoveCount () {
+		MoveCount--; 
+	}
 	
 	protected boolean IsThereOponentPiece(Position position ) {
 		
