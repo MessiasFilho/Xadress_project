@@ -8,6 +8,7 @@ import BoardGame.Board;
 import BoardGame.Piece;
 import BoardGame.Position;
 import Chess.Pieces.King;
+import Chess.Pieces.Pawn;
 import Chess.Pieces.Rock;
 
 public class ChessMatch {
@@ -101,8 +102,9 @@ public class ChessMatch {
 	
 	private Piece MakeMove (Position source , Position target  ) {
 		
-		Piece p = board.removePiece(source); 
+		ChessPiece p =(ChessPiece) board.removePiece(source); 
 		
+		p.IncreaseMoveCount();;
 		Piece  CapturedPiece = board.removePiece(target); 
 		
 		board.placePiece(p, target);
@@ -119,7 +121,9 @@ public class ChessMatch {
 	
 	private void undoMove(Position Source , Position target , Piece Capturedpiece ) {
 		
-		Piece p = board.removePiece(target); 
+		ChessPiece p = (ChessPiece) board.removePiece(target); 
+		p.DecreaseMoveCount();
+		
 		board.placePiece(p, Source);
 		
 		if (Capturedpiece != null ) {
@@ -206,9 +210,7 @@ public class ChessMatch {
 		
 		return true ; 
 	
-	
 	}
-	
 	
 	
 	private boolean TestCheck (Color color ) {
@@ -233,17 +235,34 @@ public class ChessMatch {
 	}
 	
 	private void InitialSetUp () {
-		//PlaceNewPieace('b', 6, new Rock(board, Color.White));
-		PlaceNewPieace('h', 7, new Rock(board, Color.White));
-		//PlaceNewPieace('e', 4, new King(board, Color.White));
-        PlaceNewPieace('d', 1, new Rock(board, Color.White));
+		PlaceNewPieace('h', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('a', 8, new Rock(board, Color.Black));
+        PlaceNewPieace('e', 8, new King(board, Color.Black));
+        PlaceNewPieace('a',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('b',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('c',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('d',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('e',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('f',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('g',7, new Pawn(board,Color.Black ));
+        PlaceNewPieace('h',7, new Pawn(board,Color.Black ));
+        
+        
+        
+        
+        
+        
+        PlaceNewPieace('a',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('b',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('c',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('d',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('e',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('f',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('g',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('h',2, new Pawn(board,Color.White ));
+        PlaceNewPieace('a', 1, new Rock(board, Color.White));
+        PlaceNewPieace('h', 1, new Rock(board, Color.White));
         PlaceNewPieace('e', 1, new King(board, Color.White));
-      //  PlaceNewPieace('e', 2, new Rock(board, Color.White));
-      //  PlaceNewPieace('e', 1, new Rock(board, Color.White));
-      //  PlaceNewPieace('d', 1, new King(board, Color.White));
-
-        PlaceNewPieace('b', 8, new Rock(board, Color.Black));
-        PlaceNewPieace('a', 8, new King(board, Color.Black));
        // PlaceNewPieace('d', 7, new Rock(board, Color.Black));
        // PlaceNewPieace('e', 7, new Rock(board, Color.Black));
        // PlaceNewPieace('e', 8, new Rock(board, Color.Black));
